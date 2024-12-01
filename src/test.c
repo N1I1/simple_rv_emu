@@ -24,7 +24,7 @@ Instruction int_to_instruction(uint32_t raw_instr) {
 
 void run_tests() {
     Emulator emu;
-    init_emulator(&emu, "assets/test.hex", PC_START, NUM_INSTRS, "build/test.log");
+    init_emulator(&emu, "assets/instr.hex", PC_START, NUM_INSTRS, "build/test.log");
 
     // Test ADD
     emu.state.regs[1] = 5;
@@ -448,7 +448,7 @@ void run_tests() {
     execute_ecall(&emu);
     assert(emu.state.csrs[CSR_MEPC] == 0x100);
     assert(emu.state.csrs[CSR_MCAUSE] == 11);
-    assert(emu.state.pc == emu.state.csrs[CSR_MTVEC]);
+    assert(emu.state.dnpc == emu.state.csrs[CSR_MTVEC]);
     printf("\033[0;32mECALL\t PASSED\n");
 
     // Test EBREAK
@@ -456,14 +456,14 @@ void run_tests() {
     execute_ebreak(&emu);
     assert(emu.state.csrs[CSR_MEPC] == 0x100);
     assert(emu.state.csrs[CSR_MCAUSE] == 3);
-    assert(emu.state.pc == emu.state.csrs[CSR_MTVEC]);
+    assert(emu.state.dnpc == emu.state.csrs[CSR_MTVEC]);
     printf("\033[0;32mEBREAK\t PASSED\n");
 
     // Test MRET
     emu.state.csrs[CSR_MEPC] = 0x200;
     emu.state.csrs[CSR_MSTATUS] = 0x1800;
     execute_mret(&emu);
-    assert(emu.state.pc == 0x200);
+    assert(emu.state.dnpc == 0x200);
     assert((emu.state.csrs[CSR_MSTATUS] & 0x1800) == 0x0);
     printf("\033[0;32mMRET\t PASSED\n");
 

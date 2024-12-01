@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "emulator.h"
+#include "state.h"
 
 void init_emulator(Emulator *emu, const char *hex_file, uint64_t start_pc, size_t num_instrs, const char *log_file_name) {
     memset(emu, 0, sizeof(Emulator));
