@@ -339,13 +339,13 @@ void execute_jalr(Emulator *emu, Instruction instr) {
 
 void execute_auipc(Emulator *emu, Instruction instr) {
     if (instr.rd != 0) {
-        RD = PC + (instr.imm_i << 12);
+        RD = PC + (instr.imm_u);
     }
 }
 
 void execute_lui(Emulator *emu, Instruction instr) {
     if (instr.rd != 0) {
-        RD = instr.imm_i << 12;
+        RD = instr.imm_u;
     }
 }
 

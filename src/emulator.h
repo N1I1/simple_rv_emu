@@ -34,7 +34,7 @@ typedef struct {
     int32_t imm_i; // Immediate for I-type instructions
     int32_t imm_b; // Immediate for B-type instructions
     int32_t imm_j; // Immediate for JAL instructions
-    int32_t imm_u; // Immediate for U-type instructions
+    uint32_t imm_u; // Immediate for U-type instructions
     int32_t imm_jalr; // Immediate for JALR instructions
     int32_t imm_s; // Immediate for store instructions
     int32_t imm_l; // Immediate for load instructions
